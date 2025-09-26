@@ -12,15 +12,21 @@ class LoginTest extends TestCase
 
     public function test_login()
     {
-        $user = User::factory()->create([
-            'email' => 'user@example.com',
-            'password' => bcrypt('secret123')
+        User::factory()->create([
+            'email' => 'test@example.com',
+            'password' => bcrypt('password123'),
         ]);
 
-        $this->postJson('/sanctum/token', [
+
+        $response = $this->postJson('/api/login', [
             'email' => 'test@example.com',
-            'password' => 'password123',
+            'password' => 'password123', // Send the plain password
             'device_name' => 'testing'
-        ])->assertStatus(200);
+        ]);
+
+        $response->assertStatus(200)
+            ->assertJsonStructure([
+                'token',
+            ]);
     }
 }

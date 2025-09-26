@@ -33,6 +33,7 @@ class ProjectController extends Controller
             'description' => 'nullable|string',
             'status' => 'nullable|string',
         ]);
+        $data['created_by'] = $request->user()->id;
 
         $project = Project::create($data);
 
