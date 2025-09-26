@@ -7,6 +7,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\CommentController;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,7 +18,11 @@ use App\Http\Controllers\CommentController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+// Public routes
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
 
+// Protected routes
 Route::middleware(['auth:sanctum', 'log.request'])->group(function () {
     // Auth
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -42,7 +47,6 @@ Route::middleware(['auth:sanctum', 'log.request'])->group(function () {
         Route::delete('tasks/{task}', [TaskController::class, 'destroy']);
     });
 
-    // Update allowed for manager OR assigned user handled in controller
     Route::put('tasks/{task}', [TaskController::class, 'update']);
 
     // Comments

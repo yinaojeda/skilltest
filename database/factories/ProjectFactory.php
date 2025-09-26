@@ -23,7 +23,8 @@ class ProjectFactory extends Factory
             'description' => $this->faker->paragraph(),
             'start_date' => $this->faker->date(),
             'end_date' => $this->faker->date(),
-            'created_by' => User::inRandomOrder()->first()->id,
+            'created_by' => User::inRandomOrder()->first()->id ?? User::factory()->create()->id,
+
         ];
     }
 }

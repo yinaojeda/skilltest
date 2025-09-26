@@ -23,8 +23,8 @@ class TaskFactory extends Factory
             'title' => $this->faker->sentence(),
             'description' => $this->faker->paragraph(),
             'status' => $this->faker->randomElement(['pending', 'in-progress', 'done', 'completed']),
-            'project_id' => Project::inRandomOrder()->first()->id,
-            'assigned_to' => User::inRandomOrder()->first()->id,
+            'project_id' => Project::inRandomOrder()->first()->id ?? Project::factory(),
+            'assigned_to' => User::inRandomOrder()->first()->id ?? User::factory(),
             'due_date' => $this->faker->date(),
         ];
     }
